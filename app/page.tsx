@@ -37,7 +37,7 @@ export default function Home() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/home.png"
+          src="public/Home.png"
           alt="Background"
           fill
           className="object-cover opacity-20"
