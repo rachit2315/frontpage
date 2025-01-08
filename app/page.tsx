@@ -1,101 +1,160 @@
+"use client";
+
 import Image from "next/image";
+import { FaUserGraduate, FaBook, FaSearch, FaUserPlus } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+// Sample library data
+const libraries = [
+  { id: 1, name: "Central Public Library", location: "Downtown" },
+  { id: 2, name: "Academic Excellence Library", location: "University Area" },
+  { id: 3, name: "Community Knowledge Hub", location: "West Side" },
+  { id: 4, name: "Digital Learning Center", location: "Tech Park" },
+  { id: 5, name: "Heritage Reading Room", location: "Old City" },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [mounted, setMounted] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const filteredLibraries = libraries.filter(library =>
+    library.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Only render the content after mounting to prevent hydration errors
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <div className="relative min-h-screen w-full">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/home.png"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center p-8 min-h-screen">
+        <h1 className="text-6xl font-bold mb-20 mt-10 text-white font-poppins">
+          OUR SERVICE
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full">
+          {/* Student Card */}
+          <div className="group hover:scale-105 transition-all duration-300">
+            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 flex flex-col items-center justify-between h-[400px] hover:bg-blue-600/30">
+              <FaUserGraduate className="text-6xl text-white mb-6" />
+              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">STUDENT</h2>
+              <p className="text-white text-center mb-8 font-light">
+                Quality study materials and test series for All Exams
+              </p>
+              <div className="flex gap-4">
+                <Link href="/learning-dashboard">
+                  <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
+                    <FaBook className="text-lg" />
+                    LEARNING
+                  </button>
+                </Link>
+                <Link href="https://thelearninghubonline.com/current_affairs">
+                  <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
+                    <FaUserPlus className="text-lg" />
+                    ADMISSION
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Library Admin Card */}
+          <div className="group hover:scale-105 transition-all duration-300">
+            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 flex flex-col items-center justify-between h-[400px] hover:bg-blue-600/30">
+              <FaBook className="text-6xl text-white mb-6" />
+              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">LIBRARY ADMIN</h2>
+              <p className="text-white text-center mb-8 font-light">
+                Manage Library operations like attendance, fees collection etc with ease
+              </p>
+              <Link href="/admin-dashboard">
+                <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
+                  <FaBook className="text-lg" />
+                  START MANAGING
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Search Card */}
+          <div className={`group transition-all duration-300 ${!isSearchOpen && "hover:scale-105"}`}>
+            <div className={`bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 
+              flex flex-col items-center justify-between h-[400px] 
+              ${!isSearchOpen && "hover:bg-blue-600/30"} 
+              ${isSearchOpen && "bg-blue-600/30"}`}
+            >
+              <FaSearch className="text-6xl text-white mb-6" />
+              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">SEARCH</h2>
+              <p className="text-white text-center mb-8 font-light">
+                Search library in your area
+              </p>
+              <div className="relative w-full">
+                <button 
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                  className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 
+                    text-white px-6 py-3 rounded-full font-medium transition-all"
+                >
+                  <FaSearch className="text-lg" />
+                  {isSearchOpen ? 'CLOSE SEARCH' : 'START SEARCHING'}
+                </button>
+                
+                {/* Search Dropdown */}
+                <div className={`absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-md 
+                  rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out z-50
+                  ${isSearchOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'}`}
+                >
+                  <div className="p-4 border-b border-gray-200">
+                    <div className="relative">
+                      <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Search libraries..."
+                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 
+                          focus:outline-none focus:border-blue-500 text-gray-800"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="max-h-60 overflow-y-auto bg-white">
+                    {filteredLibraries.length > 0 ? (
+                      filteredLibraries.map((library) => (
+                        <Link href={`/library/${library.id}`} key={library.id}>
+                          <div className="px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors">
+                            <div className="font-medium text-gray-800">{library.name}</div>
+                            <div className="text-sm text-gray-600">{library.location}</div>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="px-4 py-3 text-gray-600 text-center">
+                        No libraries found
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }

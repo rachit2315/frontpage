@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,7 +12,27 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+      keyframes: {
+        slideDown: {
+          '0%': { 
+            transform: 'translateY(-10px) scale(0.95)', 
+            opacity: '0' 
+          },
+          '100%': { 
+            transform: 'translateY(0) scale(1)', 
+            opacity: '1' 
+          },
+        }
+      },
+      animation: {
+        slideDown: 'slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+      },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
