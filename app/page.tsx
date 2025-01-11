@@ -33,121 +33,103 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen w-full">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/Home.png"
-          alt="Background"
-          fill
-          className="object-cover opacity-20"
-        />
-      </div>
+    <div className="relative min-h-screen w-full bg-white">
+      {/* Subtle Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-75"></div>
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center p-8 min-h-screen">
-        <h1 className="text-6xl font-bold mb-20 mt-10 text-white font-poppins">
-          OUR SERVICE
+        <h1 className="text-6xl font-bold mb-24 mt-10 text-gray-800 font-poppins">
+          Welcome to The Learning Hub
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full">
-          {/* Student Card */}
-          <div className="group hover:scale-105 transition-all duration-300">
-            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 flex flex-col items-center justify-between h-[400px] hover:bg-blue-600/30">
-              <FaUserGraduate className="text-6xl text-white mb-6" />
-              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">STUDENT</h2>
-              <p className="text-white text-center mb-8 font-light">
-                Quality study materials and test series for All Exams
-              </p>
-              <div className="flex gap-4">
-                <Link href="https://student.thelearninghubonline.com/">
-                  <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
-                    <FaBook className="text-lg" />
-                    LEARNING
-                  </button>
-                </Link>
-                <Link href="https://student.thelearninghubonline.com/signup">
-                  <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
-                    <FaUserPlus className="text-lg" />
-                    ADMISSION
-                  </button>
-                </Link>
+          {/* Students Card */}
+          <div className="group">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="p-6">
+                <div className="w-full aspect-square rounded-2xl overflow-hidden mb-6 bg-yellow-50">
+                  <Image
+                    src="/1.png"
+                    alt="Student"
+                    width={400}
+                    height={400}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Students</h2>
+                  <p className="text-gray-600 mb-8">
+                    Find lessons to learn about topics that interest you most or strengthen your skills through interactive lessons
+                  </p>
+                  <Link href="https://student.thelearninghubonline.com/">
+                    <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-6 py-3 rounded-xl font-medium transition-all">
+                      Start Learning
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Library Admin Card */}
-          <div className="group hover:scale-105 transition-all duration-300">
-            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 flex flex-col items-center justify-between h-[400px] hover:bg-blue-600/30">
-              <FaBook className="text-6xl text-white mb-6" />
-              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">LIBRARY ADMIN</h2>
-              <p className="text-white text-center mb-8 font-light">
-                Manage Library operations like attendance, fees collection etc with ease
-              </p>
-              <Link href="/admin-dashboard">
-                <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
-                  <FaBook className="text-lg" />
-                  START MANAGING
-                </button>
-              </Link>
+          {/* Parents Card */}
+          <div className="group">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="p-6">
+                <div className="w-full aspect-square rounded-2xl overflow-hidden mb-6 bg-blue-50">
+                  <Image
+                    src="/2.png"
+                    alt="Parent"
+                    width={400}
+                    height={400}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Library admin
+                  </h2>
+                  <p className="text-gray-600 mb-8">
+                  Manage Library operations like attendance, fees collection etc with ease
+                  </p>
+                  <Link href="/parent-dashboard">
+                    <button className="w-full bg-blue-400 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition-all">
+                      Manage here
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Search Card */}
-          <div className={`group transition-all duration-300 ${!isSearchOpen && "hover:scale-105"}`}>
-            <div className={`bg-white/20 backdrop-blur-sm p-8 rounded-lg border-2 border-white/30 
-              flex flex-col items-center justify-between h-[400px] 
-              ${!isSearchOpen && "hover:bg-blue-600/30"} 
-              ${isSearchOpen && "bg-blue-600/30"}`}
-            >
-              <FaSearch className="text-6xl text-white mb-6" />
-              <h2 className="text-3xl font-bold text-white mb-4 font-poppins">SEARCH</h2>
-              <p className="text-white text-center mb-8 font-light">
-                Search library in your area
-              </p>
-              <div className="relative w-full">
-                <button 
-                  onClick={() => setIsSearchOpen(!isSearchOpen)}
-                  className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 
-                    text-white px-6 py-3 rounded-full font-medium transition-all"
-                >
-                  <FaSearch className="text-lg" />
-                  {isSearchOpen ? 'CLOSE SEARCH' : 'START SEARCHING'}
-                </button>
-                
-                {/* Search Dropdown */}
-                <div className={`absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-md 
-                  rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out z-50
-                  ${isSearchOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'}`}
-                >
-                  <div className="p-4 border-b border-gray-200">
-                    <div className="relative">
-                      <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search libraries..."
-                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 
-                          focus:outline-none focus:border-blue-500 text-gray-800"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="max-h-60 overflow-y-auto bg-white">
-                    {filteredLibraries.length > 0 ? (
-                      filteredLibraries.map((library) => (
-                        <Link href={`/library/${library.id}`} key={library.id}>
-                          <div className="px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors">
-                            <div className="font-medium text-gray-800">{library.name}</div>
-                            <div className="text-sm text-gray-600">{library.location}</div>
-                          </div>
-                        </Link>
-                      ))
-                    ) : (
-                      <div className="px-4 py-3 text-gray-600 text-center">
-                        No libraries found
-                      </div>
-                    )}
+          {/* Schools Card */}
+          <div className="group">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="p-6">
+                <div className="w-full aspect-square rounded-2xl overflow-hidden mb-6 bg-purple-50">
+                  <Image
+                    src="/3.png"
+                    alt="School"
+                    width={400}
+                    height={400}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Near one ?</h2>
+                  <p className="text-gray-600 mb-8">
+                  Search library in your area
+                  </p>
+                  <div className="relative group">
+                    <input
+                      type="text"
+                      placeholder="Search for librarys..."
+                      className="w-full px-6 py-3 rounded-xl bg-white border-2 border-purple-400 text-gray-800 
+                      placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 
+                      transition-all duration-300 shadow-sm hover:border-purple-500"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-purple-400 
+                    transition-all duration-300 group-hover:text-purple-500" />
                   </div>
                 </div>
               </div>
