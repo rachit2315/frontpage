@@ -60,7 +60,7 @@ export default function Home() {
                 Quality study materials and test series for All Exams
               </p>
               <div className="flex gap-4">
-                <Link href="https://student.thelearninghubonline.com/current_affairs">
+                <Link href="https://student.thelearninghubonline.com/">
                   <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium transition-all">
                     <FaBook className="text-lg" />
                     LEARNING
